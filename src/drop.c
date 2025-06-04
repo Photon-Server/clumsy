@@ -84,3 +84,10 @@ Module dropModule = {
     // runtime fields
     0, 0, NULL
 };
+
+void setDrop(int value) {
+    char str[256];
+    sprintf(str, "%d", value);
+    setFromValue(chanceInput, "VALUE", str);
+    setFromValue(dropModule.toggleHandle, "VALUE", "YES");
+}

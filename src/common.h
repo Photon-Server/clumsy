@@ -136,6 +136,7 @@ typedef struct {
     short lastEnabled; // if it is enabled on last run
     short processTriggered; // whether this module has been triggered in last step 
     Ihandle *iconHandle; // store the icon to be updated
+    Ihandle* toggleHandle;
 } Module;
 
 extern Module lagModule;
@@ -192,5 +193,10 @@ extern const unsigned char icon8x8[8*8];
 // parameterized
 extern BOOL parameterized;
 void setFromParameter(Ihandle *ih, const char *field, const char *key);
+void setFromValue(Ihandle *ih, const char *field, const char *val);
 BOOL parseArgs(int argc, char* argv[]);
 
+extern void setEnabled(BOOL value);
+extern void setFilter(const char* value);
+extern void setLag(int value);
+extern void setDrop(int value);

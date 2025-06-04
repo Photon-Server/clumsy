@@ -40,6 +40,8 @@ static int uiListSelectCb(Ihandle *ih, char *text, int item, int state);
 static int uiFilterTextCb(Ihandle *ih);
 static void uiSetupModule(Module *module, Ihandle *parent);
 
+extern void startClientPipeServer(Ihandle * dialog);
+
 // serializing config files using a stupid custom format
 #define CONFIG_FILE "config.txt"
 #define CONFIG_MAX_RECORDS 64
@@ -118,6 +120,7 @@ EAT_SPACE:  while (isspace(*current)) { ++current; }
         filtersSize = 1;
     }
 }
+
 
 void init(int argc, char* argv[]) {
     UINT ix;
@@ -258,6 +261,8 @@ void init(int argc, char* argv[]) {
         IupSetCallback(timeout, "ACTION_CB", uiTimeoutCb);
         IupSetAttribute(timeout, "RUN", "YES");
     }
+
+    startClientPipeServer(dialog);
 }
 
 void startup() {
@@ -494,6 +499,7 @@ static void uiSetupModule(Module *module, Ihandle *parent) {
     IupSetAttribute(icon, "IMAGE", "none_icon");
     IupSetAttribute(icon, "PADDING", "4x");
     module->iconHandle = icon;
+    module->toggleHandle = toggle;
 
     // parameterize toggle
     if (parameterized) {
@@ -508,4 +514,16 @@ int main(int argc, char* argv[]) {
     startup();
     cleanup();
     return 0;
+}
+
+void setEnabled(BOOL value) {
+    if (value) {
+        uiStartCb(NULL);
+    } else {
+        uiStopCb(NULL);
+    }
+}
+
+void setFilter(const char* value) {
+    setFromValue(filterText, "VALUE", value);
 }

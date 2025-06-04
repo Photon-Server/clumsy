@@ -133,3 +133,10 @@ Module lagModule = {
     // runtime fields
     0, 0, NULL
 };
+
+void setLag(int value) {
+    char str[256];
+    sprintf(str, "%d", value);
+    setFromValue(timeInput, "VALUE", str);
+    setFromValue(lagModule.toggleHandle, "VALUE", "YES");
+}
