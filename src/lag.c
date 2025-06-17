@@ -138,5 +138,5 @@ void setLag(int value) {
     char str[256];
     sprintf(str, "%d", value);
     setFromValue(timeInput, "VALUE", str);
-    setFromValue(lagModule.toggleHandle, "VALUE", "YES");
+    setFromValue(lagModule.toggleHandle, "VALUE", value > 0 ? "YES" : "NO");
 }

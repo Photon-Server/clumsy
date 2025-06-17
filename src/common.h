@@ -200,3 +200,4 @@ extern void setEnabled(BOOL value);
 extern void setFilter(const char* value);
 extern void setLag(int value);
 extern void setDrop(int value);
+extern void setOOD(int value);

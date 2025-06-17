@@ -12,6 +12,7 @@ typedef struct {
     char filter[256];
     int lag;
     int drop;
+    int ood;
 } PipeCmdStart;
 
 #define PIPE_NAME "\\\\.\\pipe\\clumsy"
@@ -124,6 +125,7 @@ int pipeCommandCB(Ihandle* ih, char* s, int cmd, double d, void* p) {
             setLag(_cmdStart.lag);
             setDrop(_cmdStart.drop);
             setFilter(_cmdStart.filter);
+            setOOD(_cmdStart.ood);
             setEnabled(TRUE);
             break;
         }
